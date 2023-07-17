@@ -15,10 +15,10 @@ import CoreText
 */
 open class SimplePDF {
 
-    open static let defaultBackgroundBoxColor = UIColor(red: 0.95, green: 0.95, blue: 0.95, alpha: 1.0)
-    open static let defaultSpacing:CGFloat = 8
-    open static let pageNumberPlaceholder = "{{PAGE_NUMBER}}"
-    open static let pagesCountPlaceholder = "{{PAGES_COUNT}}"
+    public static let defaultBackgroundBoxColor = UIColor(red: 0.95, green: 0.95, blue: 0.95, alpha: 1.0)
+    public static let defaultSpacing:CGFloat = 8
+    public static let pageNumberPlaceholder = "{{PAGE_NUMBER}}"
+    public static let pagesCountPlaceholder = "{{PAGES_COUNT}}"
 
     // MARK: - Document Structure
     fileprivate class DocumentStructure {
@@ -55,7 +55,7 @@ open class SimplePDF {
                     case .addH6(let string, _ /*let backgroundBoxColor*/):
                         return "addH6 (\(string))"
                     case .addBodyText(let string, _ /*let backgroundBoxColor*/):
-                        return "addBodyText (\(string.substring(to: string.characters.index(string.startIndex, offsetBy: 25))))"
+                        return "addBodyText (\(String(string.prefix(25))))"
                     case .startNewPage:
                         return "startNewPage"
                     case .addImages/*(let imagePaths, let imageCaptions, let imagesPerRow, let spacing, let padding)*/:
@@ -277,25 +277,25 @@ open class SimplePDF {
             let paragraphStyle = NSMutableParagraphStyle()
             switch(style) {
             case .h1:
-                attrString.addAttribute(NSFontAttributeName, value:UIFont.boldSystemFont(ofSize: 24), range: NSMakeRange(0, attrString.length))
+                attrString.addAttribute(NSAttributedString.Key.font, value:UIFont.boldSystemFont(ofSize: 24), range: NSMakeRange(0, attrString.length))
                 paragraphStyle.alignment = .center
             case .h2:
-                attrString.addAttribute(NSFontAttributeName, value:UIFont.boldSystemFont(ofSize: 20), range: NSMakeRange(0, attrString.length))
+                attrString.addAttribute(NSAttributedString.Key.font, value:UIFont.boldSystemFont(ofSize: 20), range: NSMakeRange(0, attrString.length))
                 paragraphStyle.alignment = .center
             case .h3:
-                attrString.addAttribute(NSFontAttributeName, value:UIFont.boldSystemFont(ofSize: 16), range: NSMakeRange(0, attrString.length))
+                attrString.addAttribute(NSAttributedString.Key.font, value:UIFont.boldSystemFont(ofSize: 16), range: NSMakeRange(0, attrString.length))
                 paragraphStyle.alignment = .center
             case .h4:
-                attrString.addAttribute(NSFontAttributeName, value:UIFont.boldSystemFont(ofSize: 14), range: NSMakeRange(0, attrString.length))
+                attrString.addAttribute(NSAttributedString.Key.font, value:UIFont.boldSystemFont(ofSize: 14), range: NSMakeRange(0, attrString.length))
             case .h5:
-                attrString.addAttribute(NSFontAttributeName, value:UIFont.boldSystemFont(ofSize: 12), range: NSMakeRange(0, attrString.length))
+                attrString.addAttribute(NSAttributedString.Key.font, value:UIFont.boldSystemFont(ofSize: 12), range: NSMakeRange(0, attrString.length))
             case .h6:
-                attrString.addAttribute(NSFontAttributeName, value:UIFont.boldSystemFont(ofSize: 10), range: NSMakeRange(0, attrString.length))
+                attrString.addAttribute(NSAttributedString.Key.font, value:UIFont.boldSystemFont(ofSize: 10), range: NSMakeRange(0, attrString.length))
             case .bodyText:
-                attrString.addAttribute(NSFontAttributeName, value:UIFont.systemFont(ofSize: 10), range: NSMakeRange(0, attrString.length))
+                attrString.addAttribute(NSAttributedString.Key.font, value:UIFont.systemFont(ofSize: 10), range: NSMakeRange(0, attrString.length))
             }
             
-            attrString.addAttribute(NSParagraphStyleAttributeName, value: paragraphStyle, range: NSMakeRange(0, attrString.length))
+            attrString.addAttribute(NSAttributedString.Key.paragraphStyle, value: paragraphStyle, range: NSMakeRange(0, attrString.length))
             return attrString
         }
         
@@ -1029,7 +1029,7 @@ open class SimplePDF {
                 let pageNumberAttrString = NSMutableAttributedString(string: "\(tocAdjustedPageNumber + 1)")
                 let paragraphStyle = NSMutableParagraphStyle()
                 paragraphStyle.alignment = .right
-                pageNumberAttrString.addAttribute(NSParagraphStyleAttributeName, value: paragraphStyle, range: NSMakeRange(0, pageNumberAttrString.length))
+                pageNumberAttrString.addAttribute(NSAttributedString.Key.paragraphStyle, value: paragraphStyle, range: NSMakeRange(0, pageNumberAttrString.length))
                 
                 let col2Width:CGFloat = 50
                 let col1Width = availablePageSize.width - col2Width
@@ -1220,10 +1220,10 @@ open class SimplePDF {
         set { document.smallestHeadingToIncludeInTOC = newValue }
     }
     
-    open let pdfFilePath: String
-    open let pdfFileName: String
-    open let authorName: String
-    open let pdfTitle: String
+    public let pdfFilePath: String
+    public let pdfFileName: String
+    public let authorName: String
+    public let pdfTitle: String
     
     fileprivate var document = DocumentStructure()
     fileprivate var pdfWriter: PDFWriter

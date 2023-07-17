@@ -1,22 +1,16 @@
 PODS:
-  - Nimble (5.1.1)
-  - Quick (0.10.0)
-  - SimplePDFSwift (0.2.0)
+  - SimplePDFSwift (0.2.1)
 
 DEPENDENCIES:
-  - Nimble (~> 5.1)
-  - Quick (~> 0.10)
   - SimplePDFSwift (from `../`)
 
 EXTERNAL SOURCES:
   SimplePDFSwift:
-    :path: ../
+    :path: "../"
 
 SPEC CHECKSUMS:
-  Nimble: 415e3aa3267e7bc2c96b05fa814ddea7bb686a29
-  Quick: 5d290df1c69d5ee2f0729956dcf0fd9a30447eaa
-  SimplePDFSwift: dddcf53006d378ef81c108c4eb69ef1ce9f15451
+  SimplePDFSwift: a522dd93d2f99330dadfe4f285e327437d9aeb6f
 
-PODFILE CHECKSUM: 1969d8018ae45518cae8f1968618b8b86c1d2d9b
+PODFILE CHECKSUM: d747dcf8ff8b98957c8f49ae527838761c05bc80
 
-COCOAPODS: 1.1.1
+COCOAPODS: 1.12.1
